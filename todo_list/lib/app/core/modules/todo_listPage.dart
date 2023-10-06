@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
-// encapsulando a rota xxl'
+// encapsulando a rota '
 class TodoListPage extends StatelessWidget {
   final List<SingleChildWidget>? _bindings;
   final WidgetBuilder _page;
-  TodoListPage(
+  const TodoListPage(
       {Key? key,
       List<SingleChildWidget>? bindings,
       required WidgetBuilder page})

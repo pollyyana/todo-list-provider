@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "todo_list",
+            "name": "debug",
             "request": "launch",
             "type": "dart"
         },
