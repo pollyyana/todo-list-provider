@@ -3,6 +3,8 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:todo_list/app/core/widget/todo_list_logo.dart';
 
+import '../../../core/widget/todo_list_field.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -22,7 +24,7 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(
+                     const SizedBox(
                       height: 10,
                     ),
                     const TodoListLogo(),
@@ -32,16 +34,23 @@ class LoginPage extends StatelessWidget {
                       child: Form(
                         child: Column(
                           children: [
-                            TextFormField(),
-                            const SizedBox(height: 20),
-                            TextFormField(),
-                            const SizedBox(height: 10),
+                              TodoListField(
+                              label: 'E-mail',
+                            ),
+                              const SizedBox(height: 20),
+                              TodoListField(
+                              label: 'Senha',
+                              obscureText:true,
+                            ),
+                             const SizedBox(height: 10),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 TextButton(
                                   onPressed: () {},
-                                  child: const Text('Esqueceu sua senha?'),
+                                  child:  const Text(
+                                    'Esqueceu sua senha?',
+                                  ),
                                 ),
                                 ElevatedButton(
                                   onPressed: () {},
@@ -90,11 +99,13 @@ class LoginPage extends StatelessWidget {
                               ),
                               onPressed: () {},
                             ),
-                             Row(
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('Não tem conta'),
-                                TextButton(onPressed: (){}, child: Text('Cadastre -se'))
+                                const Text('Não tem conta'),
+                                TextButton(
+                                    onPressed: () {},
+                                    child: const Text('Cadastre -se'))
                               ],
                             ),
                           ],
