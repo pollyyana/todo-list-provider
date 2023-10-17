@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "84705092234",
+    "project_id": "todo-list-provider-e2ec4",
+    "storage_bucket": "todo-list-provider-e2ec4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84705092234:android:2af7eed65c0a8568520373",
+        "android_client_info": {
+          "package_name": "br.com.pontopolly.todo_list"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "84705092234-nafquseo3lh19373uf8bg3ujask943vv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.pontopolly.todo_list",
+            "certificate_hash": "2e478b997dca5daaeed69840f6a2f08b18116880"
+          }
+        },
+        {
+          "client_id": "84705092234-otddsq5ib4dfe8a40mq21v1c1pkpmp6l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1hY7pWxjAnQS1A7qndm3SrTIzsVwS6zw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "84705092234-otddsq5ib4dfe8a40mq21v1c1pkpmp6l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
