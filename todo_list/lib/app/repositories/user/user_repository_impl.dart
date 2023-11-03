@@ -6,7 +6,7 @@ import './user_repository.dart';
 class UserRepositoryImpl implements UserRepository {
   final FirebaseAuth _firebaseAuth;
 
-  UserRepositoryImpl({required firebaseAuth}) : _firebaseAuth = firebaseAuth;
+  UserRepositoryImpl({required FirebaseAuth firebaseAuth}) : _firebaseAuth = firebaseAuth;
 
   @override
   Future<User?> register(String email, String password) async {

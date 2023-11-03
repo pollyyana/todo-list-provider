@@ -17,7 +17,10 @@ class TodoListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: _bindings ?? [Provider(create: (_) => Object())],
+      providers: _bindings ??
+          [
+            Provider(create: (_) => Object()),
+          ],
       child: Builder(
         builder: (context) => _page(context),
       ),
