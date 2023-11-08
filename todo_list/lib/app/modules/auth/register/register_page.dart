@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list/app/core/notifier/defaul_listener_notifier.dart';
 import 'package:todo_list/app/core/ui/theme_extension.dart';
 import 'package:todo_list/app/core/validators/validators.dart';
 import 'package:todo_list/app/core/widget/todo_list_field.dart';
@@ -30,21 +33,33 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void initState() {
     super.initState();
-
-    context.read<RegisterController>().addListener(() {
-      final controller = context.read<RegisterController>();
-      // var sucess = context.read().sucess;
-      var sucess = controller.sucess;
-      var error = controller.error;
-      if (sucess) {
+    final defaulListener = DefaulListenerNotifier(
+        changeNotifier: context.read<RegisterController>());
+    defaulListener.listener(
+      context: context,
+      successCallback: (notifier, listenerInstance) {
+        listenerInstance.dispose();
         Navigator.of(context).pop();
-      } else if (error != null && error.isNotEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(error),
-          backgroundColor: Colors.red,
-        ));
-      }
-    });
+        
+      },
+      errorCallback: (notifier, listenerInstance) {
+        print(' DEU RUIM');
+      },
+    );
+    // context.read<RegisterController>().addListener(() {
+    //   final controller = context.read<RegisterController>();
+    //   // var sucess = context.read().sucess;
+    //   var sucess = controller.sucess;
+    //   var error = controller.error;
+    //   if (sucess) {
+    //     Navigator.of(context).pop();
+    //   } else if (error != null && error.isNotEmpty) {
+    //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       content: Text(error),
+    //       backgroundColor: Colors.red,
+    //     ));
+    //   }
+    // });
   }
 
   @override
