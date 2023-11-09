@@ -9,6 +9,10 @@ class UserServiceImpl implements UserService {
       : _userRepository = userRepository;
 
   @override
-  Future<User?> register(String email, String passsword) =>
-      _userRepository.register(email, passsword);
+  Future<User?> register(String email, String password) =>
+      _userRepository.register(email, password);
+
+  @override
+  Future<User?> login(String email, String passsword) =>
+      _userRepository.login(email, passsword);
 }

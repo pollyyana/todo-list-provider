@@ -1,4 +1,3 @@
-import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/app/core/modules/todo_list_module.dart';
 import 'package:todo_list/app/modules/auth/login/login_controller.dart';
@@ -12,7 +11,7 @@ class AuthModule extends TodoListModule {
             //fica as dependecias
             bindings: [
               ChangeNotifierProvider(
-                create: (_) => LoginController(),
+                create: (context) => LoginController(userService: context.read()),
               ),
               ChangeNotifierProvider(
                 create: (context) => RegisterController(userService: context.read()),
