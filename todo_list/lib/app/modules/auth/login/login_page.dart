@@ -3,6 +3,7 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/app/core/notifier/defaul_listener_notifier.dart';
+import 'package:todo_list/app/core/ui/messages.dart';
 import 'package:todo_list/app/core/widget/todo_list_logo.dart';
 import 'package:todo_list/app/modules/auth/login/login_controller.dart';
 import 'package:validatorless/validatorless.dart';
@@ -17,21 +18,27 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final _emailEC = TextEditingController();
   final _passwordEC = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final _emailFocus = FocusNode();
 
   @override
   void initState() {
     super.initState();
     DefaulListenerNotifier(changeNotifier: context.read<LoginController>())
         .listener(
-      context: context,
-      successCallback: (notifier, listenerInstance) {
-        print('login efetuado com sucesso!!');
-      }
-    );
+            context: context,
+            everCallback: (notifier, listenerInstance){
+              if (notifier is LoginController) {
+                if (notifier.hasInfo) {
+                  Messages.of(context).showInfo(notifier.infoMessage!);
+                }
+              }
+            },
+            successCallback: (notifier, listenerInstance) {
+              print('login efetuado com sucesso!!');
+            });
   }
 
   @override
@@ -64,6 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                             TodoListField(
                               label: 'E-mail',
                               controller: _emailEC,
+                              focusNode: _emailFocus,
                               validator: Validatorless.multiple([
                                 Validatorless.required('Email obrigátorio'),
                                 Validatorless.email('E-mail invalido')
@@ -73,9 +81,10 @@ class _LoginPageState extends State<LoginPage> {
                             TodoListField(
                               label: 'Senha',
                               controller: _passwordEC,
-                               validator: Validatorless.multiple([
+                              validator: Validatorless.multiple([
                                 Validatorless.required('Senha obrigátoria'),
-                                Validatorless.min(6, 'Senha deve conter no min 6 caracteres')
+                                Validatorless.min(
+                                    6, 'Senha deve conter no min 6 caracteres')
                               ]),
                               obscureText: true,
                             ),
@@ -84,18 +93,32 @@ class _LoginPageState extends State<LoginPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (_emailEC.text.isNotEmpty) {
+                                      //recuperar senha
+                                      context.read<LoginController>().forgotPassword(_emailEC.text);
+                                    } else {
+                                      _emailFocus.requestFocus();
+                                      Messages.of(context).showError(
+                                        'Digite um email para recuperar a senha',
+                                      );
+                                    }
+                                  },
                                   child: const Text(
                                     'Esqueceu sua senha?',
                                   ),
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    final formValid = _formKey.currentState?.validate()?? false;
-                                    if (formValid ) {
+                                    final formValid =
+                                        _formKey.currentState?.validate() ??
+                                            false;
+                                    if (formValid) {
                                       final email = _emailEC.text;
                                       final password = _passwordEC.text;
-                                      context.read<LoginController>().login(email, password);
+                                      context
+                                          .read<LoginController>()
+                                          .login(email, password);
                                     }
                                   },
                                   style: ElevatedButton.styleFrom(

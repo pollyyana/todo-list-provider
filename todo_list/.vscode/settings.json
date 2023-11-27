@@ -3,5 +3,11 @@
         "cupertino",
         "Schyler",
         "sqflite"
-    ]
+    ],
+    "debug.toolBarLocation": "commandCenter",
+    "workbench.activityBar.location": "side",
+    "workbench.layoutControl.enabled": true,
+    "editor.wordWrap": "on",
+    "files.autoSave": "afterDelay",
+    "editor.inlineSuggest.showToolbar": "always"
 }
