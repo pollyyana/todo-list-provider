@@ -5,7 +5,7 @@ abstract class UserService {
   Future<User?> login(String email, String passsword);
   Future<User?> forgotPassword(String email);
   Future<User?> googleLogin();
-    Future<void> googleLogout();
+    Future<void> logout();
 
 
 
