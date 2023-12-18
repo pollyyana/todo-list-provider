@@ -6,6 +6,9 @@ class TodoListUiConfig {
 
   static ThemeData get theme => ThemeData(
         textTheme:GoogleFonts.mandaliTextTheme(),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xff5c77ce),
+        ),
         primaryColor: const Color(0xff5c77ce),
         primaryColorLight: const Color(0xffabc8f7),
         elevatedButtonTheme: ElevatedButtonThemeData(
