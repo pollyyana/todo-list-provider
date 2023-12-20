@@ -5,6 +5,8 @@ import 'package:todo_list/app/core/widget/todo_list_icons.dart';
 import 'package:todo_list/app/modules/home/widgets/home_drawer.dart';
 import 'package:todo_list/app/modules/home/widgets/home_filters.dart';
 import 'package:todo_list/app/modules/home/widgets/home_header.dart';
+import 'package:todo_list/app/modules/home/widgets/home_task.dart';
+import 'package:todo_list/app/modules/home/widgets/home_week_filter.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,7 +16,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: context.primaryColor),
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color(0xFFFAFBFE),
         elevation: 0,
         actions: [
           PopupMenuButton(
@@ -25,6 +27,12 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: context.primaryColor,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+        onPressed: () {},
+        child: const Icon(Icons.add),
       ),
       backgroundColor: const Color(0xFFFAFBFE),
       drawer: HomeDrawer(),
@@ -45,6 +53,8 @@ class HomePage extends StatelessWidget {
                     children: [
                       HomeHeader(),
                       HomeFilters(),
+                      HomeWeekFilter(),
+                      HomeTask(),
                     ],
                   ),
                 ),
