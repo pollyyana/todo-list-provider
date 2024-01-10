@@ -9,5 +9,6 @@
     "workbench.layoutControl.enabled": true,
     "editor.wordWrap": "on",
     "files.autoSave": "afterDelay",
-    "editor.inlineSuggest.showToolbar": "always"
+    "editor.inlineSuggest.showToolbar": "always",
+    "generate.template.type": "Clean Code"
 }
