@@ -5,13 +5,15 @@ import './task_repository.dart';
 class TaskRepositoryImpl implements TaskRepository {
 
   final SqliteConnectionFactory _sqliteConnectionFactory;
+
   TaskRepositoryImpl({required SqliteConnectionFactory sqliteConnectionFactory}): _sqliteConnectionFactory = sqliteConnectionFactory;
 
   @override
-  Future<void> save(DateTime date, String description) async{
+  Future<void> saveTask(DateTime date, String description) async{
     //cadastro da task to do
-    final conn = await _sqliteConnectionFactory.openConnection();
-    await conn.insert('todo', {
+    final conec = await _sqliteConnectionFactory.openConnection();
+    await conec.insert(
+      'todo', {
       'id' : null,
       'descricao' : description,
       'data_hora' : date.toIso8601String(),

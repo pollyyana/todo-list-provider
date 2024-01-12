@@ -3,8 +3,8 @@ import 'package:todo_list/app/repositories/tasks/task_repository.dart';
 import './tasks_service.dart';
 
 class TasksServiceImpl implements TasksService {
+  
   // contrutor nomeado
-
   final TaskRepository _taskRepository;
 
   // encapsulamento
@@ -13,9 +13,9 @@ class TasksServiceImpl implements TasksService {
   }) : _taskRepository = taskRepository;
 
   // implentacao metodo
-
+  // proxy para o Repository
   @override
-  Future<void> save(DateTime date, String description) => _taskRepository.save(date, description);
+  Future<void> saveTask(DateTime date, String description) => _taskRepository.saveTask(date, description);
 
 
 }

@@ -1,3 +1,3 @@
 abstract class TaskRepository{
-  Future<void> save (DateTime date, String description);
+  Future<void> saveTask(DateTime date, String description);
 }
