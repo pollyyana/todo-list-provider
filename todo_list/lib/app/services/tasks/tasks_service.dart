@@ -1,4 +1,4 @@
 abstract class TasksService {
   //vai ser tipo proxy
-Future<void> saveTask(DateTime date, String description);
+Future<void> save(DateTime date, String description);
 }

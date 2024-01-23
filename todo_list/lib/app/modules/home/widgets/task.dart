@@ -29,6 +29,7 @@ class Task extends StatelessWidget {
         subtitle: const Text(
           '20/12/2023',
           style: TextStyle(
+            // ignore: dead_code
             decoration: true ? TextDecoration.lineThrough : null,
           ),
         ),

@@ -47,7 +47,10 @@ class CalendarButton extends StatelessWidget {
                   style: context.titleStyle,
                 );
               } else {
-                return const Text('SELECIONE UMA DATA');
+                return Text(
+                  'SELECIONE UMA DATA',
+                  style: context.titleStyle,
+                );
               }
             },
           ),

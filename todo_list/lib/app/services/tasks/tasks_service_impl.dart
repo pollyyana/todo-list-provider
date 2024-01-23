@@ -1,21 +1,22 @@
-import 'package:todo_list/app/repositories/tasks/task_repository.dart';
+import 'package:todo_list/app/repositories/tasks/tasks_repository.dart';
 
 import './tasks_service.dart';
 
 class TasksServiceImpl implements TasksService {
   
   // contrutor nomeado
-  final TaskRepository _taskRepository;
+  final TasksRepository _tasksRepository;
 
   // encapsulamento
   TasksServiceImpl ({
-    required TaskRepository taskRepository,
-  }) : _taskRepository = taskRepository;
+    required TasksRepository tasksRepository,
+  }) : _tasksRepository = tasksRepository;
 
   // implentacao metodo
   // proxy para o Repository
   @override
-  Future<void> saveTask(DateTime date, String description) => _taskRepository.saveTask(date, description);
+  Future<void> save(DateTime date, String description) =>
+   _tasksRepository.save(date, description);
 
 
 }

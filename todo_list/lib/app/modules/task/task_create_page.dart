@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/app/core/notifier/defaul_listener_notifier.dart';
+import 'package:validatorless/validatorless.dart';
+
 import 'package:todo_list/app/core/ui/theme_extension.dart';
 import 'package:todo_list/app/core/widget/todo_list_field.dart';
 import 'package:todo_list/app/modules/task/task_create_controller.dart';
 import 'package:todo_list/app/modules/task/widgets/calendar_button.dart';
-import 'package:validatorless/validatorless.dart';
+
+import '../../core/notifier/defaul_listener_notifier.dart';
 
 class TaskCreatePage extends StatefulWidget {
   final TaskCreateController _controller;
 
-  TaskCreatePage({super.key, required TaskCreateController controller})
-      : _controller = controller;
+  TaskCreatePage({
+    Key? key,
+    required TaskCreateController controller,
+  })  : _controller = controller,
+        super(key: key);
 
   @override
   State<TaskCreatePage> createState() => _TaskCreatePageState();
@@ -20,8 +25,8 @@ class _TaskCreatePageState extends State<TaskCreatePage> {
   final _descriptionEC = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-
-  @override
+  
+ @override
   void initState() {
     super.initState();
     DefaulListenerNotifier(
@@ -29,12 +34,10 @@ class _TaskCreatePageState extends State<TaskCreatePage> {
     ).listener(
         context: context,
         successCallback: (notifier, listenerInstance) {
-          //destruir o listener p nao precisa dele
           listenerInstance.dispose();
           Navigator.pop(context);
         });
   }
-
   @override
   void dispose() {
     super.dispose();
@@ -63,7 +66,7 @@ class _TaskCreatePageState extends State<TaskCreatePage> {
         onPressed: () {
           final formValid = _formKey.currentState?.validate() ?? false;
           if (formValid) {
-            widget._controller.saveTask(_descriptionEC.text);
+            widget._controller.save(_descriptionEC.text);
           }
         },
         label: const Text(
@@ -105,3 +108,4 @@ class _TaskCreatePageState extends State<TaskCreatePage> {
     );
   }
 }
+
