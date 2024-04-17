@@ -11,7 +11,7 @@ class DefaulChangeNotifier extends ChangeNotifier {
   bool get hasError => _error != null;
   bool get isSuccess => _success;
 
-
+  //alterar loadi para true \
   void showLoading() => _loading = true;
   void hideLoading() => _loading = false;
   void success() => _success = true;

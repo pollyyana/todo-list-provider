@@ -1,4 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide AuthProvider;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/app/app_widget.dart';
@@ -34,7 +35,7 @@ class AppModule extends StatelessWidget {
             ..loadListener(),
             lazy: false,
             //lazy quando carregar chamar o create para fzr a criaçao
-        )
+        ),
       ],
       child: const AppWidget(),
     );

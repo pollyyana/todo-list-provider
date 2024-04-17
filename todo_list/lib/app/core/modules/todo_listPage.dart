@@ -4,8 +4,10 @@ import 'package:provider/single_child_widget.dart';
 
 // encapsulando a rota '
 class TodoListPage extends StatelessWidget {
+  
   final List<SingleChildWidget>? _bindings;
   final WidgetBuilder _page;
+
   const TodoListPage(
       {Key? key,
       List<SingleChildWidget>? bindings,

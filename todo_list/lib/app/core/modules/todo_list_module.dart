@@ -17,15 +17,12 @@ abstract class TodoListModule {
   //metodo do tipo get para declarar no materialApp  e encapsular page e colocar na login page
   //todoListPage login page foi encapsulado encima do todo..
   Map<String, WidgetBuilder> get routers {
-    return _routers.map(
-      (key, pageBuilder) => MapEntry(
+    return _routers.map((key, pageBuilder) => MapEntry(
         key,
         (_) => TodoListPage(
-          bindings: _bindings,
-          page: pageBuilder,
-        ),
-      ),
-    );
+              bindings: _bindings,
+              page: pageBuilder,
+            )));
   }
 
   Widget getPage(String path, BuildContext context) {

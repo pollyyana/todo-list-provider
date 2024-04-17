@@ -1,4 +1,5 @@
 
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -24,6 +25,7 @@ class UserRepositoryImpl implements UserRepository {
 
       if (e.code == 'email-already-in-user') {
         final loginTypes =
+            // ignore: deprecated_member_use
             await _firebaseAuth.fetchSignInMethodsForEmail(email);
         if (loginTypes.contains('password')) {
           throw AuthException(

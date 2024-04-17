@@ -15,7 +15,7 @@ class DefaulListenerNotifier {
 
   void listener({
     required BuildContext context,
-    required SuccessVoidCallback? successCallback,
+    required SuccessVoidCallback successCallback,
     EverVoidCallback? everCallback,
     ErrorVoidCallback? errorCallback,
   }) {
