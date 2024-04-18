@@ -26,7 +26,7 @@ class AuthProvider extends ChangeNotifier {
     //userchanges = qualquer alteraçao no dados do usuario ele vai acessar a stream, qlq alteração ele notifica a streame
     _firebaseAuth.userChanges().listen((_) => notifyListeners());
     //alteração de login
-    _firebaseAuth.idTokenChanges().listen((user) { 
+    _firebaseAuth.authStateChanges().listen((user) { 
       if (user != null) {
          TodoListNavigator.to.pushNamedAndRemoveUntil('/home', (route) => false);
       }else{
