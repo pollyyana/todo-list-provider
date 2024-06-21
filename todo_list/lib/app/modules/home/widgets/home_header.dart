@@ -16,7 +16,7 @@ class HomeHeader extends StatelessWidget {
       children: [
         //extrair do provider com selector
         Padding(
-          padding:EdgeInsets.symmetric(horizontal: 20),
+          padding:const EdgeInsets.symmetric(horizontal: 20),
           child: Selector<AuthProvider, String>(
             selector: (context, authProvider) =>
                 authProvider.user?.displayName ?? ' NAO INFORMADO',

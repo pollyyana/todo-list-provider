@@ -25,7 +25,6 @@ class UserRepositoryImpl implements UserRepository {
 
       if (e.code == 'email-already-in-user') {
         final loginTypes =
-            // ignore: deprecated_member_use
             await _firebaseAuth.fetchSignInMethodsForEmail(email);
         if (loginTypes.contains('password')) {
           throw AuthException(
@@ -90,16 +89,16 @@ class UserRepositoryImpl implements UserRepository {
     List<String>? loginMethods;
     try {
       final googleSignIn = GoogleSignIn();
-      final googleleUser = await googleSignIn.signIn();
-      if (googleleUser != null) {
+      final googleUser = await googleSignIn.signIn();
+      if (googleUser != null) {
        loginMethods =
-            await _firebaseAuth.fetchSignInMethodsForEmail(googleleUser.email);
+            await _firebaseAuth.fetchSignInMethodsForEmail(googleUser.email);
         if (loginMethods.contains('password')) {
           throw AuthException(
               message:
                   'Voce utilizou o e-mail para cadastro no Todo List, caso tenha esquecido sua senha, por favor clique no link esqueci minha senha ');
         } else {
-          final googleAuth = await googleleUser.authentication;
+          final googleAuth = await googleUser.authentication;
           final firebaseCredential = GoogleAuthProvider.credential(
               accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
           var userCredential =

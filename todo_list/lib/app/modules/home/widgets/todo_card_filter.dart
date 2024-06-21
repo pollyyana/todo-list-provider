@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:todo_list/app/core/ui/theme_extension.dart';
 import 'package:todo_list/app/models/task_filter_enum.dart';
 import 'package:todo_list/app/models/total_tasks_model.dart';
