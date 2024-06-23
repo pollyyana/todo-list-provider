@@ -6,12 +6,14 @@ import 'package:todo_list/app/models/week_task_model.dart';
 import 'package:todo_list/app/services/tasks/tasks_service.dart';
 
 class HomeController extends DefaulChangeNotifier {
+  final TasksService _tasksService;
   var filterSelected = TaskFilterEnum.today;
   TotalTasksModel? todayTotalTasks;
   TotalTasksModel? tomorrowTotalTasks;
   TotalTasksModel? weekTotalTasks;
+  List<TaskModel> allTasks = [];
+  List<TaskModel> filteredTasks = [];
 
-  final TasksService _tasksService;
 
   HomeController({required TasksService tasksService})
       : _tasksService = tasksService;
@@ -29,17 +31,51 @@ class HomeController extends DefaulChangeNotifier {
 
     //populando
     todayTotalTasks = TotalTasksModel(
-      totalTasks: tomorrowTasks.length,
-      totalTasksFinish: tomorrowTasks.where((task)=> task.finished).length ,
-    ); 
-    todayTotalTasks = TotalTasksModel(
       totalTasks: todayTasks.length,
-      totalTasksFinish: todayTasks.where((task)=> task.finished).length ,
-    ); 
+      totalTasksFinish: todayTasks.where((task) => task.finished).length,
+    );
+
+    todayTotalTasks = TotalTasksModel(
+      totalTasks: tomorrowTasks.length,
+      totalTasksFinish: tomorrowTasks.where((task) => task.finished).length,
+    );
+
     todayTotalTasks = TotalTasksModel(
       totalTasks: weekTasks.tasks.length,
-      totalTasksFinish: weekTasks.tasks.where((task)=> task.finished).length ,
+      totalTasksFinish: weekTasks.tasks.where((task) => task.finished).length,
     );
+    notifyListeners();
+  }
+
+  Future<void> findTasks({required TaskFilterEnum filter}) async {
+    //trocar filtro selecionado
+    filterSelected = filter;
+    showLoading();
+    notifyListeners();
+    List<TaskModel> tasks;
+
+    switch(filter) {
+      case TaskFilterEnum.today:
+        tasks = await _tasksService.getToday();
+        break;
+        case TaskFilterEnum.tomorrow:
+        tasks = await _tasksService.getTomorrow();
+        break;
+        case TaskFilterEnum.week:
+        final weekModel = await _tasksService.getWeek();
+        tasks = weekModel.tasks;
+        break;
+    }
+    filteredTasks = tasks;
+    allTasks = tasks;
+
+    hideLoading();
+    notifyListeners();
+  }
+
+  Future<void> refreshPage() async {
+    await findTasks(filter: filterSelected);
+    await loadTotalTasks();
     notifyListeners();
   }
 }
