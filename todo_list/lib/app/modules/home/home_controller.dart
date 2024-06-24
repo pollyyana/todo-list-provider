@@ -13,6 +13,7 @@ class HomeController extends DefaulChangeNotifier {
   TotalTasksModel? weekTotalTasks;
   List<TaskModel> allTasks = [];
   List<TaskModel> filteredTasks = [];
+  DateTime? initialDateofWeek;
 
 
   HomeController({required TasksService tasksService})
@@ -63,6 +64,7 @@ class HomeController extends DefaulChangeNotifier {
         break;
         case TaskFilterEnum.week:
         final weekModel = await _tasksService.getWeek();
+        initialDateofWeek = weekModel.startDate;
         tasks = weekModel.tasks;
         break;
     }
