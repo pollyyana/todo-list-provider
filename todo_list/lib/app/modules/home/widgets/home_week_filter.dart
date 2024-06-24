@@ -33,12 +33,17 @@ class HomeWeekFilter extends StatelessWidget {
                   // DateTime.now(),
                   value,
                   locale: 'pt_BR',
-                  initialSelectedDate: DateTime.now(),
+                  height: 2,
+                  initialSelectedDate: value,
                   selectionColor: context.primaryColor,
                   selectedTextColor: Colors.white,
                   daysCount: 7,
                   monthTextStyle: const TextStyle(fontSize: 8),
                   dayTextStyle: const TextStyle(fontSize: 13),
+                  dateTextStyle: const TextStyle(fontSize: 13),
+                  onDateChange: (date) {
+                    context.read<HomeController>().filterByday(date);
+                  },
                 );
               },
             ),

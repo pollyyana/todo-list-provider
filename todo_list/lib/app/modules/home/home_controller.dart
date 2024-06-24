@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:todo_list/app/core/notifier/defaul_change_notifier.dart';
 import 'package:todo_list/app/models/task_filter_enum.dart';
 import 'package:todo_list/app/models/task_model.dart';
@@ -14,7 +15,7 @@ class HomeController extends DefaulChangeNotifier {
   List<TaskModel> allTasks = [];
   List<TaskModel> filteredTasks = [];
   DateTime? initialDateofWeek;
-
+  DateTime? selectedDay;
 
   HomeController({required TasksService tasksService})
       : _tasksService = tasksService;
@@ -55,23 +56,43 @@ class HomeController extends DefaulChangeNotifier {
     notifyListeners();
     List<TaskModel> tasks;
 
-    switch(filter) {
+    switch (filter) {
       case TaskFilterEnum.today:
         tasks = await _tasksService.getToday();
         break;
-        case TaskFilterEnum.tomorrow:
+      case TaskFilterEnum.tomorrow:
         tasks = await _tasksService.getTomorrow();
         break;
-        case TaskFilterEnum.week:
+      case TaskFilterEnum.week:
         final weekModel = await _tasksService.getWeek();
         initialDateofWeek = weekModel.startDate;
         tasks = weekModel.tasks;
         break;
     }
+    //populou os DADOS
     filteredTasks = tasks;
     allTasks = tasks;
+    // condicional
+    if (filter == TaskFilterEnum.week) {
+      if (initialDateofWeek != null) {
+        filterByday(initialDateofWeek!);
+      }
+    }
 
     hideLoading();
+    notifyListeners();
+  }
+
+  void filterByday(DateTime date) {
+    selectedDay = date;
+    // filteredTasks= allTasks.where((task){
+    //   return task.dateTime ==  date;
+    // }).toList();
+    filteredTasks = allTasks
+        .where(
+          (task) => DateUtils.isSameDay(task.dateTime, date),
+        )
+        .toList();
     notifyListeners();
   }
 
