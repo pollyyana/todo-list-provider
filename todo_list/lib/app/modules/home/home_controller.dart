@@ -74,9 +74,14 @@ class HomeController extends DefaulChangeNotifier {
     allTasks = tasks;
     // condicional
     if (filter == TaskFilterEnum.week) {
-      if (initialDateofWeek != null) {
+      if (selectedDay != null) {
+        return filterByday(selectedDay!);
+      } else if (initialDateofWeek != null) {
         filterByday(initialDateofWeek!);
       }
+      
+    }else{
+      selectedDay = null;
     }
 
     hideLoading();
@@ -84,9 +89,9 @@ class HomeController extends DefaulChangeNotifier {
   }
 
   void filterByday(DateTime date) {
-    selectedDay = date;
-    // filteredTasks= allTasks.where((task){
-    //   return task.dateTime ==  date;
+    // selectedDay = date;
+    // filteredTasks = allTasks.where((task) {
+    //   return task.dateTime == date;
     // }).toList();
     filteredTasks = allTasks
         .where(
