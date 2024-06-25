@@ -32,18 +32,19 @@ class _HomePageState extends State<HomePage> {
         listenerInstance.dispose();
       },
     );
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-    widget._homeController.loadTotalTasks();
-    widget._homeController.findTasks(filter: TaskFilterEnum.today);
-      
-    },);
+    WidgetsBinding.instance?.addPostFrameCallback(
+      (timeStamp) {
+        widget._homeController.loadTotalTasks();
+        widget._homeController.findTasks(filter: TaskFilterEnum.today);
+      },
+    );
   }
 
   Future<void> _goToCreateTask(BuildContext context) async {
     // Navigator.of(context).pushNamed('/task/create');
-      // MaterialPageRoute(
-      //   builder: (_) => TaskModule().getPage('/task/create', context),
-      // ),
+    // MaterialPageRoute(
+    //   builder: (_) => TaskModule().getPage('/task/create', context),
+    // ),
     await Navigator.of(context).push(
       PageRouteBuilder(
         transitionDuration: const Duration(milliseconds: 400),
@@ -76,9 +77,14 @@ class _HomePageState extends State<HomePage> {
         actions: [
           PopupMenuButton(
             icon: const Icon(TodoListIcons.filter),
+            onSelected: (value) {
+              widget._homeController.showOrHideFinishingTask();
+            },
             itemBuilder: (_) => [
-              const PopupMenuItem<bool>(
-                  child: Text('Mostrar tarefas concluidas'))
+               PopupMenuItem<bool>(
+                value: true,
+                child: Text('${widget._homeController.showFinishingTask ? 'Esconder' : 'Mostrar'}  tarefas concluidas'),
+              ),
             ],
           ),
         ],
